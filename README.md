@@ -7,8 +7,10 @@ Alphabet Soup, which is a philanthropic organization with a mission to help othe
 This analysis utilizes the Python TensorFlow library to build and optimize the deep neural network.
 
 ## Results
+The following section answers questions concerning the data preprocessing, deep learning model building, model evaluation, and model optimization.
 
 ### Data Preprocessing
+In this portion of the project, the `charity_data.csv` file was read and used to make a dataframe. Non-beneficial columns (variables) were removed from the dataframe. Columns containing categorical variables with a large number of unique values were modified with binning (combining groups together). These categorical variables underwent binary encoding and reincorporation into the original dataframe. This modified dataset was then split into feature and target arrays, then split into training and testing groups, scaled, and finally input into a deep neural network model.
 
 #### What variable(s) are considered the target(s) for your model?
 
