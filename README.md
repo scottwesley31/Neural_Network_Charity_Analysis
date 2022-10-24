@@ -13,10 +13,16 @@ The following section answers questions concerning the data preprocessing, deep 
 In this portion of the project, the `charity_data.csv` file was read and used to make a dataframe. Non-beneficial columns (variables) were removed from the dataframe. Columns containing categorical variables with a large number of unique values were modified with binning (combining groups together). These categorical variables underwent binary encoding and reincorporation into the original dataframe. This modified dataset was then split into feature and target arrays, then split into training and testing groups, scaled, and finally input into a deep neural network model.
 
 #### What variable(s) are considered the target(s) for your model?
+Here is a screenshot of all of the columns (variables) found in the `charity_data.csv` file:
+![variables](https://user-images.githubusercontent.com/107309793/197432111-42fbb79b-fd16-4179-b4d1-d9f9096cfe6c.png)
+
+Since the purpose of this analysis is to determine which organizations are worth donating to from past data, the only variable that makes sense as a target is the `IS_SUCCESSFUL` column. This column indicates whether or not a particular donation went to good use or not. This is what we want the model to predict from future inputs.
 
 #### What variable(s) are considered to be the features for your model?
+Most of the other variables would be considered features. There are a few variables that may not have any actual affect on the dependent `IS_SUCCESSFUL` - like `EIN` and `NAME`.
 
 #### What variable(s) are neither targets nor features, and should be removed from the input data?
+As stated above, there are a few variables that may not have an affect on whether or not the donation was successful. These include `EIN` and `NAME` which are simply identification columns that are arbitrary. Some other columns that were considered later on in analysis as potential unimpactful features were `STATUS` and `SPECIAL_CONSIDERATIONS`.
 
 ### Compiling, Training, and Evaluating the Model
 
