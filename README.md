@@ -99,5 +99,10 @@ Here is a list of the changes I made in each optimization attempt
 - Changed the activation functions for the first and second hidden layers to `tanh` to potentially account for more negative input/output values.
 
 ## Summary
-To summarize all of the results:
+From the original model design to the first optimization attempt: **loss increased by 20% (0.64 to 0.84)** and **accuracy increased by 3% (0.61 to 0.64)** after removing a potentially non-beneficial column from the features.
 
+From the first optimization attempt to the second: **loss decreased by 4% (0.84 to 0.80)** and **accuracy decreased by 11% (0.64 to 0.53)** after removing 2 input columns, modifying binning, removing columns from encoded data, and adding a 3rd hidden layer. This drop in accuracy may have been due to overfitting.
+
+From the second optimization attempt to the third: **loss decreased by 13% (0.80 down to 0.67)** and **accuracy increased by 16% (0.53 to 0.69)** after keeping columns dropped in the 2nd attempt, dropping a potentially noisy variable, maintaining binning as before, increasing the number of neurons substantially in the first hidden layer, and changing the hidden layer activation functions from `relu` to `tanh`.
+
+**Recommendation:** The need to generate a model which can predict whether or not it is worth it for Alphabet Soup to donate money to organizations is a classification problem. It would definitely be worth it to compare the results of a **random forest classifier** on this dataset. It could be beneficial to split the data up into weak learners during the training phase, rather than relying on the evaluation of input data within neurons accross multiple layers. Using the random forest classifier would also save a lot of time during the optimization phase of this project since there are less parameters to modify during the training step.
