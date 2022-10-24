@@ -28,7 +28,7 @@ As stated above, there are a few variables that may not have an affect on whethe
 In this section of the project, the deep neural net was defined, trained, and evaluated. The number of input features, hidden nodes, hidden layers, and activation functions were defined prior to compiling the model and training it. Saving checkpoints (for every 5 epochs) were added as the model was trained. The accuracy and loss were then calculated after feeding testing data into the neural net.
 
 #### How many neurons, layers, and activation functions did you select for your neural network model, and why?
-Here is how the neural network was defined in the first optimization attempt:
+Here is how the neural network was defined in the **first optimization** attempt:
 ![opt1_nn](https://user-images.githubusercontent.com/107309793/197434043-b919b9e2-e1be-490a-8dd9-ab755e7c758d.png)
 In this case, I did not change the number of neurons (80 and 30), layers (2), or activation functions ("relu" for hidden and "sigmoid" for output) from the original model design.
 
@@ -42,14 +42,14 @@ The Rectified Linear Unit (ReLU) function felt appropriate for the input data be
 
 The sigmoid function was selected for the output layer since it is classifying the `IS_SUCCESSFUL` result as either 0 or 1 (yes or no).
 
-Here is how the neural network was defined in the second optimization attempt:
+Here is how the neural network was defined in the **second optimization** attempt:
 ![opt2_nn](https://user-images.githubusercontent.com/107309793/197436438-98a09c3c-95d7-4d6e-b3f0-fbf9ae34041b.png)
 
 In the second attempt, the only change made was the addition of a 3rd hidden layer with 30 neurons. The selection of 30 neurons within the 3rd layer was mostly arbitrary again. The third layer was added to see if it made a difference in model accuracy.
 
 The `relu` activation function was also maintained in this example to provide the same simplification and flexibility executed in the previous layers.
 
-Here is how the neural network was defined in the third optimization attempt:
+Here is how the neural network was defined in the **third optimization** attempt:
 ![opt3_nn](https://user-images.githubusercontent.com/107309793/197437080-99763974-5706-4ff7-b8f7-38898d4688cd.png)
 
 In the third optimization attempt, it was determined that an additional hidden layer did not have a significant impact on the accuracy score of the model, so it was removed. The number of neurons in the first hidden layer was increased to 168 (which was calculated by multiplying the number of input variables - in this case 42 - by 3; 42 was also added to this number in an attempt to account for bias terms but this was an improper rationale in retrospect).
@@ -72,14 +72,32 @@ Here are the associated model loss and model accuracy scores obtained for each a
 ![opt3_accuracy](https://user-images.githubusercontent.com/107309793/197439574-27372605-e7dd-4d8f-badb-fcec3f322fdd.png)
 
 To summarize:
-- Original: Loss of 0.64, Accuracy of 0.61
+- Original: Loss of **0.64**, Accuracy of **0.61**
 - Optimization Attempt 1: Loss of **0.84**, Accuracy of **0.64**
 - Optimization Attempt 2: Loss of **0.80**, Accuracy of **0.53**
 - Optimization Attempt 3: Loss of **0.67**, Accuracy of **0.69**
 
-I was unable to reach an accuracy score of 0.75 (75%) but did improve the model accuracy by 8% (from 0.61 to 0.69). Loss increases were also minimized (from 0.64 to 0.67; only 3% loss).
+I was unable to reach an accuracy score of **0.75 (75%)** but did improve the model accuracy by **8%** (from 0.61 to 0.69). Loss increases were also minimized (from 0.64 to 0.67; only 3% loss).
 
 #### What steps did you take to try and increase model performance?
+Here is a list of the changes I made in each optimization attempt
 
+**Optimization Attempt 1**:
+- Dropped `SPECIAL_CONSIDERATIONS` column from input data
+
+**Optimization Attempt 2**:
+- Dropped `SPECIAL_CONSIDERATIONS` and `STATUS` column from input data
+- Decreased `APPLICATION_TYPE` bins from 9 to 7 (more unique values under `Other` category)
+- Dropped `AFFILIATION_Other` and `USE_CASE_Other` from encoded dataframe prior to scaling (found outliers in scaled data from previous round in these columns by looking at a box plot of the `X_train_scaled` data)
+- Added a 3rd hidden layer with 30 neurons
+
+**Optimization Attempt 3**:
+- Dropped `ASK_AMT` from input data after determining this might be a noisy variable with a lot of outliers (looked at boxplot of all features).
+- Kept `SPECIAL_CONSIDERATIONS` and `STATUS` columns within input data.
+- Kept binning for `APPLICATION_TYPE` at 7 categories.
+- Increased number of neurons in the first hidden layer 168 (at least triple the number of inputs)
+- Changed the activation functions for the first and second hidden layers to `tanh` to potentially account for more negative input/output values.
 
 ## Summary
+To summarize all of the results:
+
