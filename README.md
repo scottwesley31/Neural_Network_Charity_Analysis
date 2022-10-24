@@ -42,8 +42,44 @@ The Rectified Linear Unit (ReLU) function felt appropriate for the input data be
 
 The sigmoid function was selected for the output layer since it is classifying the `IS_SUCCESSFUL` result as either 0 or 1 (yes or no).
 
+Here is how the neural network was defined in the second optimization attempt:
+![opt2_nn](https://user-images.githubusercontent.com/107309793/197436438-98a09c3c-95d7-4d6e-b3f0-fbf9ae34041b.png)
+
+In the second attempt, the only change made was the addition of a 3rd hidden layer with 30 neurons. The selection of 30 neurons within the 3rd layer was mostly arbitrary again. The third layer was added to see if it made a difference in model accuracy.
+
+The `relu` activation function was also maintained in this example to provide the same simplification and flexibility executed in the previous layers.
+
+Here is how the neural network was defined in the third optimization attempt:
+![opt3_nn](https://user-images.githubusercontent.com/107309793/197437080-99763974-5706-4ff7-b8f7-38898d4688cd.png)
+
+In the third optimization attempt, it was determined that an additional hidden layer did not have a significant impact on the accuracy score of the model, so it was removed. The number of neurons in the first hidden layer was increased to 168 (which was calculated by multiplying the number of input variables - in this case 42 - by 3; 42 was also added to this number in an attempt to account for bias terms but this was an improper rationale in retrospect).
+
+A different activation function was used in the hidden layers (`tanh`) mostly to see if this would change the accuracy score but also to see if output ranges between -1 and 1 could better represent the patterns in this dataset. It was observed after scaling the training and testing data that some negative values did exist, leading to the decision to use `tanh` and to potentially better account for these values.
+
 #### Were you able to achive the target model performance?
+Here are the associated model loss and model accuracy scores obtained for each attempt.
+
+**Original Attempt**
+![original_accuracy](https://user-images.githubusercontent.com/107309793/197439485-00d69619-2e96-49a1-95b0-029f4fb453bd.png)
+
+**Optimization Attempt 1**
+![opt1_accuracy](https://user-images.githubusercontent.com/107309793/197439529-d51f26f5-e1d2-4195-828d-4b935380fa29.png)
+
+**Optimization Attempt 2**
+![opt2_accuracy](https://user-images.githubusercontent.com/107309793/197439548-10ba3ab0-3e1b-4062-83d6-bfdc41d6ef77.png)
+
+**Optimization Attempt 3**
+![opt3_accuracy](https://user-images.githubusercontent.com/107309793/197439574-27372605-e7dd-4d8f-badb-fcec3f322fdd.png)
+
+To summarize:
+- Original: Loss of 0.64, Accuracy of 0.61
+- Optimization Attempt 1: Loss of **0.84**, Accuracy of **0.64**
+- Optimization Attempt 2: Loss of **0.80**, Accuracy of **0.53**
+- Optimization Attempt 3: Loss of **0.67**, Accuracy of **0.69**
+
+I was unable to reach an accuracy score of 0.75 (75%) but did improve the model accuracy by 8% (from 0.61 to 0.69). Loss increases were also minimized (from 0.64 to 0.67; only 3% loss).
 
 #### What steps did you take to try and increase model performance?
+
 
 ## Summary
