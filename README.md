@@ -25,8 +25,22 @@ Most of the other variables would be considered features. There are a few variab
 As stated above, there are a few variables that may not have an affect on whether or not the donation was successful. These include `EIN` and `NAME` which are simply identification columns that are arbitrary. Some other columns that were considered later on in analysis as potential unimpactful features were `STATUS` and `SPECIAL_CONSIDERATIONS`.
 
 ### Compiling, Training, and Evaluating the Model
+In this section of the project, the deep neural net was defined, trained, and evaluated. The number of input features, hidden nodes, hidden layers, and activation functions were defined prior to compiling the model and training it. Saving checkpoints (for every 5 epochs) were added as the model was trained. The accuracy and loss were then calculated after feeding testing data into the neural net.
 
 #### How many neurons, layers, and activation functions did you select for your neural network model, and why?
+Here is how the neural network was defined in the first optimization attempt:
+![opt1_nn](https://user-images.githubusercontent.com/107309793/197434043-b919b9e2-e1be-490a-8dd9-ab755e7c758d.png)
+In this case, I did not change the number of neurons (80 and 30), layers (2), or activation functions ("relu" for hidden and "sigmoid" for output) from the original model design.
+
+I kept the neurons and layers the same mostly because I wanted to check and see if I could improve the accuracy of the model first by modifying the input data.
+
+The first hidden layer has 80 neurons in it because it is following the good rule of thumb to have two to three times the amount of neurons in the hidden layer as number of inputs. After the data is preprocessed and undergoes binary encoding, the number of inputs = 41.
+
+The number of neurons in the second layer is more arbitrary. It's moreso important that a second layer exists to give the neural network more of a chance to identify nonlinear characteristics.
+
+The Rectified Linear Unit (ReLU) function felt appropriate for the input data because of it's simplifiying output and flexibility (returning a value from 0 to infinity).
+
+The sigmoid function was selected for the output layer since it is classifying the `IS_SUCCESSFUL` result as either 0 or 1 (yes or no).
 
 #### Were you able to achive the target model performance?
 
